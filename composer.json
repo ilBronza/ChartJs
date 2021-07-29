@@ -1,0 +1,38 @@
+{
+    "name": "ilbronza/chartjs",
+    "description": ":chartjs wrapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davide Bronzini",
+            "email": "davide@sistema.srl",
+            "homepage": "https://www.sistema.srl"
+        }
+    ],
+    "homepage": "https://github.com/ilbronza/chartjs",
+    "keywords": ["Laravel", "ChartJs"],
+    "require": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "IlBronza\\ChartJs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IlBronza\\ChartJs\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IlBronza\\ChartJs\\ChartJsServiceProvider"
+            ],
+            "aliases": {
+                "ChartJs": "IlBronza\\ChartJs\\Facades\\ChartJs"
+            }
+        }
+    }
+}
