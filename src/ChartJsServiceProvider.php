@@ -32,6 +32,7 @@ class ChartJsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/chartjs.php', 'chartjs');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'chartjs');
 
         // Register the service the package provides.
         $this->app->singleton('chartjs', function ($app) {
