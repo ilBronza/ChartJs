@@ -31,7 +31,7 @@ class Dataset
 		return $this->chart;
 	}
 
-	public function setLabel(string $label) : static
+	public function setLabel(string $label) : self
 	{
 		$this->label = $label;
 
@@ -79,6 +79,33 @@ class Dataset
 	public function setBackgroundColor(string $backgroundColor)
 	{
 		$this->backgroundColor = $backgroundColor;
+	}
+
+	public function getAxisDataString() : string
+	{
+		return $this->getData()->map(function($item)
+		{
+			return [
+				'x' => $item->getX(),
+				'y' => $item->getY()
+			];
+		})->toJson();
+	}
+
+	public function getPieDataString() : string
+	{
+		return $this->getData()->map(function($item)
+		{
+			return $item->getY();
+		})->toJson();
+	}
+
+	public function getDataString() : string
+	{
+		if($this->getChart()->hasAxis())
+			return $this->getAxisDataString();
+
+		return $this->getPieDataString();
 	}
 
 	//RIMUOVERE

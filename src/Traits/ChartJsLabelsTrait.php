@@ -152,6 +152,11 @@ trait ChartJsLabelsTrait
 		return $this->setTextualLabels();
 	}
 
+	public function getPieLabels()
+	{
+		return $this->setAlphabeticalLabels();
+	}
+
 	public function getLabels()
 	{
 		if(! count($this->labels))

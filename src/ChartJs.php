@@ -2,6 +2,8 @@
 
 namespace IlBronza\ChartJs;
 
+use IlBronza\ChartJs\Traits\ChartJsAxisTrait;
+use IlBronza\ChartJs\Traits\ChartJsBackgroundColorTrait;
 use IlBronza\ChartJs\Traits\ChartJsDatasetsTrait;
 use IlBronza\ChartJs\Traits\ChartJsGettersTrait;
 use IlBronza\ChartJs\Traits\ChartJsLabelsTrait;
@@ -11,6 +13,10 @@ class ChartJs
 	use ChartJsGettersTrait;
 	use ChartJsDatasetsTrait;
 	use ChartJsLabelsTrait;
+
+	use ChartJsAxisTrait;
+
+	use ChartJsBackgroundColorTrait;
 
 	public $id;
 
@@ -24,7 +30,12 @@ class ChartJs
 	public $labels;
 
 	public $xScaleName;
+	public $maxX;
+
 	public $yScaleName;
+	public $maxY;
+
+	public $pieBackgroundColor;
 
 	public function __construct()
 	{
