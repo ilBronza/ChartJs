@@ -1,12 +1,12 @@
 <canvas id="{{ $chart->getId() }}" style="width: 100%; height: '300px';"></canvas>
 <div class="uk-form-horizontal">
 
-  <label class="uk-form-label" for="form-horizontal-select">@lang('chartjs::chartType')</label>
+  <label class="uk-form-label" for="form-horizontal-select">@lang('chartjs::chartjs.chartType')</label>
   <div class="uk-form-controls">
   <select data-chartid="{{ $chart->getId() }}" class="charttype uk-select">
-    <option value="line">line</option>
-    <option value="pie">pie</option>
-    <option value="bar">bar</option>
+    @foreach(['line', 'pie', 'bar'] as $type)
+    <option @if($type == $chart->getType()) selected @endif value="{{ $type }}">{{ $type }}</option>
+    @endforeach
   </select>
   </div>
 </div>
