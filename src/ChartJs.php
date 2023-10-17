@@ -7,6 +7,7 @@ use IlBronza\ChartJs\Traits\ChartJsBackgroundColorTrait;
 use IlBronza\ChartJs\Traits\ChartJsDatasetsTrait;
 use IlBronza\ChartJs\Traits\ChartJsGettersTrait;
 use IlBronza\ChartJs\Traits\ChartJsLabelsTrait;
+use Illuminate\Support\Collection;
 
 class ChartJs
 {
@@ -29,10 +30,11 @@ class ChartJs
 	public $labelsPrecision = false;
 	public $labels;
 
+	public Collection $axes;
+
 	public $xScaleName;
 	public $maxX;
 
-	public $yScaleName;
 	public $maxY;
 
 	public $pieBackgroundColor;
@@ -42,6 +44,7 @@ class ChartJs
 		$this->datasets = collect();
 
 		$this->initializeLabels();
+		$this->initializeAxes();
 	}
 
 	public function setType(string $type)
@@ -64,15 +67,6 @@ class ChartJs
 		return view('chartjs::_singleChart', ['chart' => $this]);
 	}
 
-	public function setXScaleName(string $xScaleName)
-	{
-		$this->xScaleName = $xScaleName;
-	}
-
-	public function setYScaleName(string $yScaleName)
-	{
-		$this->yScaleName = $yScaleName;
-	}
 	
 	public function getXScaleName() : string
 	{

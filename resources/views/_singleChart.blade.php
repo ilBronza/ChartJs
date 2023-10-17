@@ -39,6 +39,9 @@ window.chartOptions{{ $chart->getId() }} = {
         label: '{{ $dataset->getLabel() }}',
         backgroundColor: '{{ $dataset->getBackgroundColor() }}',
         data: {!! $dataset->getDataString() !!},
+        @if($yAxisId = $dataset->getYAxisId())
+        yAxisID: '{{ $yAxisId }}',
+        @endif
         },
       @endforeach
 
@@ -47,28 +50,31 @@ window.chartOptions{{ $chart->getId() }} = {
   options: {
     @if($chart->hasAxis())
     scales: {
-      y: {
-        beginAtZero: true,
-        min: null,
-        max: {{ $chart->getMaxYString() }},
-        type: 'linear',
-        reverse: false,
+      @foreach($chart->getAxes() as $axis)
+      {{ $axis->getName() }}: {
+        
+        beginAtZero: {{ $axis->getBeginAtZero() ? 'true' : 'false' }},
+        
+        min: {{ $axis->getMin() ?? 'null' }},
+        
+        max: {{ $axis->getMax() ?? 'null' }},
+
+        @if($axis->getPosition())
+        position: '{{ $axis->getPosition() }}',
+        @endif
+
+        @if($axis->getType())
+        type: '{{ $axis->getType() }}',
+        @endif
+
+        reverse: {{ $axis->getReverse() ? 'true' : 'false' }},
+
         title: {
-          display: true,
-          text: '{{ $chart->GetYScaleName() }}'
+          display: {{ $axis->mustDisplayTitle() ? 'true' : 'false' }},
+          text: '{{ $axis->getTitleText() }}'
         }
       },
-      x: {
-        beginAtZero: true,
-        min: null,
-        max: {{ $chart->getMaxXString() }},
-        {{-- type: 'linear', --}}
-        reverse: false,
-        title: {
-          display: true,
-          text: '{{ $chart->GetXScaleName() }}'
-        }
-      }
+      @endforeach
     }
     @endif
   }

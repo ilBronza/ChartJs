@@ -2,6 +2,7 @@
 
 namespace IlBronza\ChartJs;
 
+use IlBronza\ChartJs\Axis;
 use IlBronza\ChartJs\ChartJs;
 use IlBronza\ChartJs\Data;
 use Illuminate\Support\Collection;
@@ -12,6 +13,8 @@ class Dataset
 	public $data;
 	public $chart;
 	public $backgroundColor;
+	public ? Axis $yAxis = null;
+	public $yAxisId;
 
 
 	static $sampleColors = ['#00FFFF', '#7FFFD4', '#0000FF', '#8A2BE2', '#5F9EA0', '#7FFF00', '#FF7F50', '#6495ED', '#00BFFF', '#ADFF2F', '#FF00FF'];
@@ -74,6 +77,26 @@ class Dataset
 	public function getBackgroundColor()
 	{
 		return $this->backgroundColor ?? $this->getRandomColor();
+	}
+
+	public function setYAxis(Axis $axis)
+	{
+		$this->yAxis = $axis;
+	}
+
+	public function getYAxis() : ? Axis
+	{
+		return $this->yAxis;
+	}
+
+	// public function setYAxisId(string $yAxisId)
+	// {
+	// 	$this->yAxisId = $yAxisId;
+	// }
+
+	public function getYAxisId() : ? string
+	{
+		return $this->getYAxis()?->getName();
 	}
 
 	public function setBackgroundColor(string $backgroundColor)

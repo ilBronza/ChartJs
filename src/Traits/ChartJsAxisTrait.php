@@ -2,19 +2,108 @@
 
 namespace IlBronza\ChartJs\Traits;
 
+use IlBronza\ChartJs\Axis;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 trait ChartJsAxisTrait
 {
-	public function hasAxis()
+	public function setAxisScaleName(Axis $axis, string $yScaleName)
 	{
-		if($this->getType() == 'line')
-			return true;
+		$axis
+			->setTitleText($yScaleName)
+			->setTitleDisplay(true);
+	}
+	
+	public function setXScaleName(string $scaleName)
+	{
+		$axis = $this->getDefaultXAxis();
 
-		if($this->getType() == 'bar')
-			return true;
+		$this->setAxisScaleName($axis, $scaleName);
+	}
 
-		return false;
+	public function setYScaleName(string $scaleName)
+	{
+		$axis = $this->getDefaultYAxis();
+
+		$this->setAxisScaleName($axis, $scaleName);
+	}
+
+	protected function addDefaultYAxes()
+	{
+		$this->addAxis(
+			$this->createDefaultYAxes()
+		);
+	}
+
+	protected function addDefaultXAxes()
+	{
+		$this->addAxis(
+			$this->createDefaultXAxes()
+		);
+	}
+
+	public function createYAxes(string $name = null) : Axis
+	{
+		$axis = new Axis();
+
+		$axis->setPosition('left');
+		$axis->setType('linear');
+
+		if($name)
+			$axis->setName('y' . $name);
+
+		return $axis;
+	}
+
+	public function createDefaultYAxes() : Axis
+	{
+		return $this->createYAxes()
+				->setName('y');
+	}
+
+	public function createDefaultXAxes() : Axis
+	{
+		$axis = new Axis();
+
+		$axis->setName('x');
+
+		return $axis;
+	}
+
+	public function getDefaultYAxis() : Axis
+	{
+		return $this->getAxes()->firstWhere('name', 'y');
+	}
+
+	public function getDefaultXAxis() : Axis
+	{
+		return $this->getAxes()->firstWhere('name', 'x');		
+	}
+
+	public function addAxis(Axis $axis)
+	{
+		$this->axes->push($axis);
+	}
+
+	public function initializeAxes()
+	{
+		$this->axes = collect();
+
+		$this->addDefaultYAxes();
+		$this->addDefaultXAxes();
+	}
+
+	public function hasAxis() : bool
+	{
+		return true;
+		// if($this->getType() == 'line')
+		// 	return true;
+
+		// if($this->getType() == 'bar')
+		// 	return true;
+
+		// return false;
 	}
 
 	public function setMaxY(float $maxY)
@@ -45,5 +134,10 @@ trait ChartJsAxisTrait
 	public function getMaxXString()
 	{
 		return $this->getMaxX() ?? 'null';
+	}
+
+	public function getAxes() : Collection
+	{
+		return $this->axes;
 	}
 }
