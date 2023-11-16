@@ -12,6 +12,7 @@ class Dataset
 	public $label;
 	public $data;
 	public $chart;
+	public ? string $type = null;
 	public $backgroundColor;
 	public ? Axis $yAxis = null;
 	public $yAxisId;
@@ -87,6 +88,16 @@ class Dataset
 	public function getYAxis() : ? Axis
 	{
 		return $this->yAxis;
+	}
+
+	public function setType(string $type = null)
+	{
+		$this->type = $type;
+	}
+
+	public function getType() : ? string
+	{
+		return $this->type;
 	}
 
 	// public function setYAxisId(string $yAxisId)

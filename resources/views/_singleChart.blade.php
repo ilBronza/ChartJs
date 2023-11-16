@@ -39,6 +39,11 @@ window.chartOptions{{ $chart->getId() }} = {
         label: '{{ $dataset->getLabel() }}',
         backgroundColor: '{{ $dataset->getBackgroundColor() }}',
         data: {!! $dataset->getDataString() !!},
+
+        @if($type = $dataset->getType())
+        type: '{{ $type }}',
+        @endif
+
         @if($yAxisId = $dataset->getYAxisId())
         yAxisID: '{{ $yAxisId }}',
         @endif
@@ -56,7 +61,6 @@ window.chartOptions{{ $chart->getId() }} = {
         beginAtZero: {{ $axis->getBeginAtZero() ? 'true' : 'false' }},
         
         min: {{ $axis->getMin() ?? 'null' }},
-        
         max: {{ $axis->getMax() ?? 'null' }},
 
         @if($axis->getPosition())
