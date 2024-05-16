@@ -33,6 +33,7 @@ class ChartJs
 	public Collection $axes;
 
 	public $xScaleName;
+	public $yScaleName;
 	public $maxX;
 
 	public $maxY;

@@ -24,7 +24,7 @@ class Axis
 
 	public ChartJs $chart;
 
-	public function getName()
+	public function getName() : ? string
 	{
 		return $this->name;
 	}
