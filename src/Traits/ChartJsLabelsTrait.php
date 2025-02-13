@@ -146,6 +146,8 @@ trait ChartJsLabelsTrait
 		if($this->hasNumericLabels())
 			return $this->setNumericLabels();
 
+
+
 		if($this->hasAlphabeticalLabels())
 			return $this->setAlphabeticalLabels();
 

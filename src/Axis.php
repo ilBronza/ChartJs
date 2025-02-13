@@ -12,7 +12,7 @@ class Axis
 	public ?float $min = null;
 	public ?float $max = null;
 
-	public ?string $type = null;
+	public ?string $type = 'linear';
 	public ?string $position = null;
 
 	public bool $reverse = false;
